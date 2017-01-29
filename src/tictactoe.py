@@ -37,7 +37,7 @@ def is_winner(board, player_mark):
            board[2] == board[4] == board[6] == player_mark
 
 
-def gameEnd():
+def game_end():
     return is_winner(BOARD, HUMAN_PLAYER) or is_winner(BOARD, COMPUTER_PLAYER)
 
 
@@ -45,10 +45,8 @@ def determine_player_mark():
     global HUMAN_PLAYER
     global COMPUTER_PLAYER
     line = ''
-    while line != PLAYER1_MARK or line != PLAYER2_MARK:
+    while line != PLAYER1_MARK and line != PLAYER2_MARK:
         line = input().upper()
-        print('LINE: ' + line)
-
     HUMAN_PLAYER = line
 
     if HUMAN_PLAYER == PLAYER1_MARK:
@@ -63,6 +61,7 @@ def input_player_move():
     while line not in [0,1,2,3,4,5,6,7,8] or not is_free(int(line)):
         line = input()
     make_move(BOARD, HUMAN_PLAYER, int(line))
+
 
 def copy_board():
     board = BOARD[:]
@@ -107,10 +106,12 @@ def ai():
 def main():
     print('Welcome to the almighty TicTacToe game!')
     #Ask player mark
-    print('Would you like to be first player (X) or second player (O)?')
+    print('Would you like to be first player (X) or second player (O): ')
     determine_player_mark()
-    print(PLAYER1_MARK + " " + PLAYER2_MARK)
     #Ask move
+    show_board(BOARD)
+    input_player_move()
+    show_board(BOARD)
 
     #make moves untill game ends
 
