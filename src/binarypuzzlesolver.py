@@ -1,7 +1,7 @@
 # Binary puzzle solver for manually (hard-coded) inserted puzzles using recursion
 import numpy as np
 
-DMAX = [0, 1]
+digits = [0, 1]
 bp_size = 6
 bp = np.array([[1, -1, 1, -1, -1, 1],
                [-1, -1, -1, -1, 0, -1],
@@ -29,6 +29,10 @@ def array_conflict(array, j, num):
         return True
     elif j != 0 and j != bp_size - 1 and array[j - 1] == array[j + 1] == num:
         return True
+    elif j > 1 and array[j - 1] == array[j - 2] == num:
+        return True
+    elif j < bp_size - 2 and array[j + 1] == array[j + 2] == num:
+        return True
     return False
 
 
@@ -40,8 +44,32 @@ def col_conflict(i, j, num):
     return array_conflict(bp[:,j], i, num)
 
 
+def row_duplicate(array, i):
+    row = array[i]
+    if row[row == -1].size == 0:
+        for x in range(0, bp_size):
+            if x != i and np.array_equal(row, array[x]):
+                return True
+    return False
+
+
+def col_duplicate(array, j):
+    col = array[:,j]
+    if col[col == -1].size == 0:
+        for y in range(0, bp_size):
+            if y != j and np.array_equal(col, array[:,y]):
+                return True
+    return False
+
+
+def is_duplicate(i, j, num):
+    array = np.copy(bp)
+    array[i, j] = num
+    return row_duplicate(array, i) or col_duplicate(array, j)
+
+
 def gives_conflict(i, j, num):
-    return row_conflict(i, j, num) or col_conflict(i, j, num)
+    return row_conflict(i, j, num) or col_conflict(i, j, num) or is_duplicate(i, j, num)
 
 
 def solve():
@@ -50,25 +78,16 @@ def solve():
         row = index_spot[0]
         col = index_spot[1]
 
-        for num in DMAX:
+        for num in digits:
             if not gives_conflict(row, col, num):
                 bp[row, col] = num
                 solve()
                 bp[row, col] = -1
     else:
         print(bp)
-        exit(0)
+
 
 
 print(bp)
-print('')
+print()
 solve()
-
-# a=bp[1]
-# b=bp[:,1]
-#
-# print(a)
-# print('')
-# print(b)
-#
-# print(b[b == 1].size)
