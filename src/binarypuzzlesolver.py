@@ -1,6 +1,7 @@
 # Binary puzzle solver for manually (hard-coded) inserted puzzles using recursion
 import numpy as np
 from time import time
+import itertools
 
 digits = [0, 1]
 bp1 = np.array([[1, -1, 1, -1, -1, 1],      # 6x6 binary puzzle
@@ -41,11 +42,10 @@ bp2 = np.array([                            # 14x14 binary puzzle - will not sol
 bp_size = bp[0].size
 
 
-def get_free_spot():    # Re-implement to be more python like
+def get_free_spot():
     if bp[bp == -1].size == 0:
         return -1
-    for i in range(0, bp_size):
-        for j in range(0, bp_size):
+    for i, j in itertools.product(range(0, bp_size), range(0, bp_size)):
             if bp[i, j] == -1:
                 return [i, j]
 
