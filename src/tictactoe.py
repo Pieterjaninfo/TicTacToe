@@ -83,21 +83,21 @@ def copy_board():
 
 def ai_decide_move():   # Separate for loops for now, can be made more efficient
     move_index = -1
-    for i in range(0,9):    # Make move if can win
+    for i in range(0, 9):    # Make move if can win
         if is_free(i):
             _board = copy_board()
             make_move(_board, COMPUTER_PLAYER, i)
             if is_winner(_board, COMPUTER_PLAYER):
                 return i
 
-    for i in range(0,9):    # Make move if opponent otherwise can win
+    for i in range(0, 9):    # Make move if opponent otherwise can win
         if is_free(i):
             _board = copy_board()
             make_move(_board, HUMAN_PLAYER, i)
             if is_winner(_board, HUMAN_PLAYER):
                 return i
 
-    for i in range(0,9):    # Make move: pref middle, then corners, then sides
+    for i in range(0, 9):    # Make move: pref middle, then corners, then sides
         if is_free(i):
             if i == 4:
                 move_index = i
@@ -143,7 +143,7 @@ def play_again():
 
 def reset_board():
     global BOARD
-    BOARD = [0,1,2,3,4,5,6,7,8]
+    BOARD = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 
 def play_game_manual():
@@ -157,10 +157,12 @@ def play_game_manual():
     if HUMAN_PLAYER == PLAYER2_MARK:
         ai_pro(COMPUTER_PLAYER)
     while not game_end(HUMAN_PLAYER, COMPUTER_PLAYER):
-        if is_winner(BOARD, COMPUTER_PLAYER) : break
+        if is_winner(BOARD, COMPUTER_PLAYER):
+            break
         show_board(BOARD)
         input_player_move()
-        if is_winner(BOARD, HUMAN_PLAYER) : break
+        if is_winner(BOARD, HUMAN_PLAYER):
+            break
         ai_pro(COMPUTER_PLAYER)
 
     show_board(BOARD)

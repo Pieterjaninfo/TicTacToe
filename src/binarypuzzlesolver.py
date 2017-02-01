@@ -71,7 +71,7 @@ def row_conflict(i, j, num):
 
 
 def col_conflict(i, j, num):
-    return array_conflict(bp[:,j], i, num)
+    return array_conflict(bp[:, j], i, num)
 
 
 def row_duplicate(array, i):
@@ -84,10 +84,10 @@ def row_duplicate(array, i):
 
 
 def col_duplicate(array, j):
-    col = array[:,j]
+    col = array[:, j]
     if col[col == -1].size == 0:
         for y in range(0, bp_size):
-            if y != j and np.array_equal(col, array[:,y]):
+            if y != j and np.array_equal(col, array[:, y]):
                 return True
     return False
 

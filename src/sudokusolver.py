@@ -21,7 +21,7 @@ sp_size = sp[0].size
 
 def get_free_spot():
     if sp[sp == 0].size > 0:
-        for i, j in itertools.product(range(0,sp_size), range(0,sp_size)):
+        for i, j in itertools.product(range(0, sp_size), range(0, sp_size)):
             if sp[i, j] == 0:
                 return [i, j]
     return -1
@@ -33,7 +33,7 @@ def row_conflict(i, d):
 
 
 def col_conflict(j, d):
-    col = sp[:,j]
+    col = sp[:, j]
     return col[col == d].size > 0
 
 
