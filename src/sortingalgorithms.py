@@ -41,9 +41,46 @@ def selection_sort(a):
     return a
 
 
-print(insertion_sort(array))
-print(insertion_sort_faster(array))
-print(selection_sort(array))
+# Merge sort
+def merge_sort(m):
+    if len(m) <= 1:
+        return m
+
+    left = []
+    right = []
+    for i, x in enumerate(m):
+        if i <= len(m)//2:
+            left.append(x)
+        else:
+            right.append(x)
+
+    left = merge_sort(left)
+    right = merge_sort(right)
+
+    return merge(left, right)
 
 
+def merge(left, right):
+    result = []
 
+    while left and right:
+        if left[0] <= right[0]:
+            result.append(left[0])
+            left.pop(0)
+        else:
+            result.append(right[0])
+            right.pop(0)
+
+    while left:
+        result.append(left[0])
+        left.pop(0)
+    while right:
+        result.append(right[0])
+        right.pop(0)
+    return result
+
+
+# print(insertion_sort(array))
+# print(insertion_sort_faster(array))
+# print(selection_sort(array))
+# print(merge_sort(array))
