@@ -18,9 +18,9 @@ wins_bot = 0
 def show_board(board):
     print("""
     {0} | {1} | {2}
-    ---------
+    --+---+--
     {3} | {4} | {5}
-    ---------
+    --+---+--
     {6} | {7} | {8}
     """.format(board[0], board[1], board[2], board[3], board[4], board[5], board[6], board[7], board[8]))
 
@@ -81,7 +81,7 @@ def copy_board():
     return board
 
 
-def ai_decide_move():   # Separate for loops for now, can be made more efficient
+def ai_determine_move():   # Separate for loops for now, can be made more efficient
     move_index = -1
     for i in range(0, 9):    # Make move if can win
         if is_free(i):
@@ -117,7 +117,7 @@ def ai_decide_move_random():    # R
 
 
 def ai_pro(ai_mark):
-    move_index = ai_decide_move()
+    move_index = ai_determine_move()
     make_move(BOARD, ai_mark, move_index)
 
 
@@ -213,4 +213,5 @@ def play_ai_game(ai_type1, ai_type2, loops):
             ai1_wins/loops*100, ai2_wins/loops*100, (loops-ai1_wins-ai2_wins)/loops*100))
 
 
-play_ai_game(1, 1, 1000000)
+# play_ai_game(1, 1, 10000)
+play_game_manual()
