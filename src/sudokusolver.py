@@ -2,6 +2,7 @@ import numpy as np
 import itertools
 
 digits = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# digits = ['A','D','J','K','N' , 'O', 'R', 'U' , 'V']
 amount_solutions = 0
 
 sp = np.array([                 # World's hardest sudoku puzzle
@@ -16,8 +17,19 @@ sp = np.array([                 # World's hardest sudoku puzzle
     [0,9,0,0,0,0,4,0,0]
 ])
 
-sp_size = sp[0].size
+sp3 = np.array([
+    [9,0,0,8,0,2,0,0,0],
+    [0,0,6,0,0,9,0,4,1],
+    [0,0,0,0,7,0,8,0,0],
+    [0,0,0,0,8,0,0,0,0],
+    [2,0,0,5,4,0,1,0,0],
+    [0,6,1,0,0,0,4,0,0],
+    [0,5,7,0,0,0,0,0,0],
+    [6,0,0,0,0,0,0,1,0],
+    [0,8,0,0,3,6,0,7,2]
+])
 
+sp_size = sp[0].size
 
 def get_free_spot():
     if sp[sp == 0].size > 0:
