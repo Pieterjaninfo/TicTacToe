@@ -31,5 +31,7 @@ def write_img(data):
         text_file.write(data)
 
 
-write_img(get_ascii(get_gray_image('../resources/images/peeri.png')))
+img = get_ascii(get_gray_image('../resources/images/query.png'))
+write_img(img)
+
 print('Done writing.')
